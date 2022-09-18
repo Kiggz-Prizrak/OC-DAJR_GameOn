@@ -29,3 +29,29 @@ modalCloser.addEventListener("click", closeModal);
 function closeModal() {
   modalbg.style.display = "none";
 }
+
+// object wich contains the form's validations
+const inputValidators = {
+  firstNameInputValidator: undefined,
+  lastNameInputValidator: undefined,
+  emailInputValidator: undefined,
+  birthDateValidator: undefined,
+  tournamentAssistedValidator: undefined,
+  CUvalidator: undefined // document.getElementById("checkbox1").checked,
+};
+
+function fieldsValidators(tag, regex, validator, message, errorMessage) {
+  const element = document.getElementById(tag);
+  if (regex.test(element.value)) {
+    inputValidators[validator] = true;
+    const errorSpan = document.getElementById(message);
+    errorSpan.innerText = null;
+    element.setAttribute("style", "border: none;");
+  } else {
+    inputValidators[validator] = false;
+    console.log("unauthorized");
+    const errorSpan = document.getElementById(message);
+    errorSpan.innerText = errorMessage;
+    element.setAttribute("style", "border:2px solid red;");
+  }
+}
