@@ -37,7 +37,7 @@ const inputValidators = {
   emailInputValidator: undefined,
   birthDateValidator: undefined,
   tournamentAssistedValidator: undefined,
-  CUvalidator: undefined // document.getElementById("checkbox1").checked,
+  CUvalidator: undefined, // document.getElementById("checkbox1").checked,
 };
 
 function fieldsValidators(tag, regex, validator, message, errorMessage) {
@@ -55,3 +55,121 @@ function fieldsValidators(tag, regex, validator, message, errorMessage) {
     element.setAttribute("style", "border:2px solid red;");
   }
 }
+
+// functions
+
+const submit = document.getElementById("submit");
+submit.addEventListener("click", (e) => {
+  console.log("submit lancé");
+  e.preventDefault();
+  e.stopPropagation();
+
+  fieldsValidators(
+    "first",
+    /^[\wàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\d '-]+$/,
+    "firstNameInputValidator",
+    "firstnameErrorMessage",
+    "Veuillez entrer 2 caractères pour le champs du prénom"
+  );
+  fieldsValidators(
+    "last",
+    /^[\wàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\d '-]+$/,
+    "lastNameInputValidator",
+    "lastnameErrorMessage",
+    "Veuillez entrer 2 caractères pour le champs du nom"
+  );
+  fieldsValidators(
+    "email",
+    /^[\w\d.+-]+@[\w.-]+\.[a-z]{2,}$/,
+    "emailInputValidator",
+    "emailErrorMessage",
+    "Veuillez saisir une adresse e-mail valide"
+  );
+  fieldsValidators(
+    "birthdate",
+    /^\d{4}-\d\d-\d\d$/,
+    "birthDateValidator",
+    "birthdayErrorMessage",
+    "Vous devez entrer une date de naissance"
+  );
+  fieldsValidators(
+    "quantity",
+    /^\d{1,2}$/,
+    "tournamentAssistedValidator",
+    "quantityErrorMessage",
+    "Vous devez choisir une option"
+  );
+
+  if (document.getElementById("checkbox1").checked) {
+    inputValidators.CUvalidator = true;
+    const errorSpan = document.getElementById("conditionErrorMessage");
+    errorSpan.innerText = null;
+    // element.setAttribute("style", "border: none;");
+  } else {
+    inputValidators.CUvalidator = false;
+    console.log("unauthorized");
+    const errorSpan = document.getElementById("conditionErrorMessage");
+    errorSpan.innerText = "veuillez accepter les conditions";
+    // element.setAttribute("style", "border:2px solid red;");
+  }
+
+  if (document.querySelector('[name="location"]:checked')) {
+    const errorSpan = document.getElementById("locationErrorMessage");
+    errorSpan.innerText = null;
+    // element.setAttribute("style", "border: none;");
+  } else {
+    console.log("unauthorized");
+    const errorSpan = document.getElementById("locationErrorMessage");
+    errorSpan.innerText = "veuillez sélectionner une ville";
+    // element.setAttribute("style", "border:2px solid red;");
+  }
+
+  console.log(inputValidators);
+
+  const validation = Object.values(inputValidators).every(
+    (value) => value === true
+  );
+
+  if (validation) {
+    const data = {
+      firstname: document.getElementById("first").value,
+      lastName: document.getElementById("last").value,
+      email: document.getElementById("email").value,
+      birthdate: document.getElementById("birthdate").value,
+      tournamentAssisted: document.getElementById("quantity").value,
+      tournamentWish:
+        document.querySelector('[name="location"]:checked').value ,
+      PreventTornament: document.getElementById("checkbox2").value,
+    };
+
+    // fetch("server  adress", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(data),
+    // })
+    //   //récupération de la réponse
+    //   .then(function (res) {
+    //     if (res.ok) {
+    //       return res.json();
+    //     }
+    //   })
+    //   .catch(function (err) {
+    //     console.log(err);
+    //   });
+
+    console.log(data);
+    const form = document.querySelector(
+      "body > main > div.bground > div > div > form"
+    );
+    form.remove();
+    const formBody = document.querySelector(
+      "body > main > div.bground > div > div"
+    );
+    const formMessage = document.createElement("h2");
+    formMessage.innerText = "Merci pour votre inscription";
+    formBody.appendChild(formMessage);
+  }
+});
