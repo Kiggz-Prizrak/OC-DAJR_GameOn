@@ -137,8 +137,7 @@ submit.addEventListener("click", (e) => {
       email: document.getElementById("email").value,
       birthdate: document.getElementById("birthdate").value,
       tournamentAssisted: document.getElementById("quantity").value,
-      tournamentWish:
-        document.querySelector('[name="location"]:checked').value ,
+      tournamentWish: document.querySelector('[name="location"]:checked').value,
       PreventTornament: document.getElementById("checkbox2").value,
     };
 
@@ -169,7 +168,24 @@ submit.addEventListener("click", (e) => {
       "body > main > div.bground > div > div"
     );
     const formMessage = document.createElement("h2");
+    formMessage.classList = "formMessage";
     formMessage.innerText = "Merci pour votre inscription";
+    const closeFomBtn = document.createElement("button");
+    closeFomBtn.className = "closeFomBtn";
+    closeFomBtn.innerText = "Fermer";
+    closeFomBtn.addEventListener("click", () => {
+      closeModal() 
+    })
+
     formBody.appendChild(formMessage);
+    formBody.appendChild(closeFomBtn);
+
+    formBody.style.height = "80vh";
+    formBody.style.display = "flex";
+    formBody.position = "relative"
+    formBody.style.alignItems = "center";
+    formBody.style.justifyContent = "center"
+
+
   }
 });
