@@ -406,7 +406,6 @@ input[data-error]::after {
   font-size: 16px;
 }
 .hero-section {
-  min-height: 93vh;
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -512,6 +511,15 @@ footer {
   .hero-section {
     display: block;
     box-shadow: unset;
+  }
+  h1 {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 52px;
+
+    color: #000000;
   }
   .hero-content {
     background: #fff;

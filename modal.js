@@ -37,9 +37,15 @@ const inputValidators = {
   emailInputValidator: undefined,
   birthDateValidator: undefined,
   tournamentAssistedValidator: undefined,
-  CUvalidator: undefined, // document.getElementById("checkbox1").checked,
+  CUvalidator: undefined,
 };
 
+/**
+ * @function
+ * @description check input validity in form
+ *
+ * @returns {boolean} - input validity
+ */
 function fieldsValidators(tag, regex, validator, message, errorMessage) {
   const element = document.getElementById(tag);
   if (regex.test(element.value)) {
@@ -56,7 +62,12 @@ function fieldsValidators(tag, regex, validator, message, errorMessage) {
   }
 }
 
-// functions
+/**
+ * @function
+ * @description submit input's event listener
+ *
+ * @returns {fetch} - users data & close the modal
+ */
 
 const submit = document.getElementById("submit");
 submit.addEventListener("click", (e) => {
@@ -141,6 +152,13 @@ submit.addEventListener("click", (e) => {
       PreventTornament: document.getElementById("checkbox2").value,
     };
 
+    /**
+     * @fetch
+     * @description send user's data
+     *
+     * @returns {json} - send data to the api
+     */
+
     // fetch("server  adress", {
     //   method: "POST",
     //   headers: {
@@ -174,18 +192,16 @@ submit.addEventListener("click", (e) => {
     closeFomBtn.className = "closeFomBtn";
     closeFomBtn.innerText = "Fermer";
     closeFomBtn.addEventListener("click", () => {
-      closeModal() 
-    })
+      closeModal();
+    });
 
     formBody.appendChild(formMessage);
     formBody.appendChild(closeFomBtn);
 
     formBody.style.height = "80vh";
     formBody.style.display = "flex";
-    formBody.position = "relative"
+    formBody.position = "relative";
     formBody.style.alignItems = "center";
-    formBody.style.justifyContent = "center"
-
-
+    formBody.style.justifyContent = "center";
   }
 });
