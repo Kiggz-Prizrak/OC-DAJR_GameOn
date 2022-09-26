@@ -69,8 +69,9 @@ function fieldsValidators(tag, regex, validator, message, errorMessage) {
  * @returns {fetch} - users data & close the modal
  */
 
-const submit = document.getElementById("submit");
-submit.addEventListener("click", (e) => {
+const validate = () => {
+
+  document.querySelector("body > main > div.bground > div > div > form").addEventListener("submit", (e) => {
   console.log("submit lancé");
   e.preventDefault();
   e.stopPropagation();
@@ -150,6 +151,7 @@ submit.addEventListener("click", (e) => {
       tournamentAssisted: document.getElementById("quantity").value,
       tournamentWish: document.querySelector('[name="location"]:checked').value,
       PreventTornament: document.getElementById("checkbox2").value,
+      
     };
 
     /**
@@ -203,5 +205,11 @@ submit.addEventListener("click", (e) => {
     formBody.position = "relative";
     formBody.style.alignItems = "center";
     formBody.style.justifyContent = "center";
+
+    return data;
   }
 });
+
+}
+
+validate()

@@ -144,6 +144,7 @@ img {
   .bground {
     margin-top: 50px;
     background-color: transparent !important;
+    
   } 
   .content {
     top: 0px;
@@ -474,7 +475,7 @@ input[data-error]::after {
   color: #fff;
   position: relative;
   text-align: left;
-  min-width: 424px;
+  
 }
 .hero-content::after {
   content: "";
